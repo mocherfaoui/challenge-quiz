@@ -1,11 +1,11 @@
 const getMaxScore = (wrongAnswers, totalQuestions) => {
-  return (
-    Math.round(((totalQuestions - wrongAnswers) / totalQuestions) * 100) || 0
-  );
+  return Math.round(((totalQuestions - wrongAnswers) / totalQuestions) * 100);
 };
 
 const getCurrentScore = (correctAnswers, wrongAnswers) => {
-  return Math.round((correctAnswers / (correctAnswers + wrongAnswers)) * 100);
+  return (
+    Math.round((correctAnswers / (correctAnswers + wrongAnswers)) * 100) || 0
+  );
 };
 
 const getLowestScore = (correctAnswers, totalQuestions) => {
