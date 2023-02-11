@@ -1,4 +1,4 @@
-export const getDifficulty = (difficulty) => {
+export const getRating = (difficulty) => {
   if (!["easy", "medium", "hard"].includes(difficulty)) {
     throw new Error(
       "Couldn't find this type of diffulty, try a value from: easy - medium - hard"

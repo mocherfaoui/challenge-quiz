@@ -14,7 +14,7 @@ import {
 } from "./question.styles";
 import ScoreBar from "./scorebar";
 
-import { getDifficulty } from "../utils/get-difficulty";
+import { getRating } from "../utils/get-rating";
 import {
   getCurrentScore,
   getLowestScore,
@@ -79,7 +79,7 @@ export default function Question() {
         <div>
           {[...Array(3)].map((_, index) => (
             <Star key={index}>
-              {getDifficulty(questions[progress.currentQuestion].difficulty) <=
+              {getRating(questions[progress.currentQuestion].difficulty) <=
               index ? (
                 <span>&#9734;</span>
               ) : (
