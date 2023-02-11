@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { getScore } from "../utils/score-calculation";
+import { getScore } from "../utils";
 
 export default function ScoreBar({
   correctAnswers,
@@ -16,7 +16,7 @@ export default function ScoreBar({
   return (
     <ScoreContainer>
       <ScoreDetails>
-        <span>Score: {currentScore || 0}%</span>
+        <span>Score: {currentScore}%</span>
         <span>Max Score: {maxScore}%</span>
       </ScoreDetails>
       <ScoreBarContainer>

@@ -14,29 +14,24 @@ import {
 } from "./question.styles";
 import ScoreBar from "./scorebar";
 
-import { getRating } from "../utils/get-rating";
-import { shuffleArray } from "../utils/shuffle-array";
+import { getRating, shuffleArray } from "../utils";
 
-export default function Question({ questions }) {
-  const [progress, setProgress] = useState({
-    currentQuestion: 0,
-    correctAnswers: 0,
-    wrongAnswers: 0,
-  });
+export default function Question({
+  question,
+  progress,
+  setProgress,
+  totalQuestions,
+}) {
   const [chosenAnswer, setChosenAnswer] = useState("");
 
   const choices = useMemo(
     () =>
-      shuffleArray([
-        questions[progress.currentQuestion].correct_answer,
-        ...questions[progress.currentQuestion].incorrect_answers,
-      ]),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [progress.currentQuestion]
+      shuffleArray([question.correct_answer, ...question.incorrect_answers]),
+    [question]
   );
 
   const didAnswer = chosenAnswer !== "";
-  const correctAnswer = questions[progress.currentQuestion].correct_answer;
+  const correctAnswer = question.correct_answer;
   const isCorrectAnswer = chosenAnswer === correctAnswer;
 
   const onAnswerClick = (buttonValue, choice) => {
@@ -66,19 +61,24 @@ export default function Question({ questions }) {
   return (
     <Container>
       <ProgressBar
-        value={(progress.currentQuestion + 1) * (100 / 20)}
+        value={(progress.currentQuestion + 1) * (100 / totalQuestions)}
         max="100"
+        data-testid="progress-bar"
       />
       <QuestionInfo>
         <h2>
-          Question {progress.currentQuestion + 1} of {questions.length}
+          Question{" "}
+          <span data-testid="current-question-number">
+            {progress.currentQuestion + 1}
+          </span>{" "}
+          of
+          <span data-testid="total-questions"> {totalQuestions}</span>
         </h2>
-        <small>{questions[progress.currentQuestion].category}</small>
+        <small>{question.category}</small>
         <div>
           {[...Array(3)].map((_, index) => (
             <Star key={index}>
-              {getRating(questions[progress.currentQuestion].difficulty) <=
-              index ? (
+              {getRating(question.difficulty) <= index ? (
                 <span>&#9734;</span>
               ) : (
                 <span>&#9733;</span>
@@ -87,8 +87,8 @@ export default function Question({ questions }) {
           ))}
         </div>
       </QuestionInfo>
-      <QuestionDescription>
-        {questions[progress.currentQuestion].question}
+      <QuestionDescription data-testid="question-description">
+        {question.question}
       </QuestionDescription>
       <Choices>
         {choices.map((choice, index) => (
@@ -99,6 +99,7 @@ export default function Question({ questions }) {
             isCorrect={didAnswer && choice === correctAnswer}
             didAnswer={didAnswer}
             onClick={(e) => onAnswerClick(e.target.innerText, choice)}
+            data-testid="question-choice"
           >
             {choice}
           </ChoiceButton>
@@ -111,7 +112,7 @@ export default function Question({ questions }) {
           ) : (
             <Paragraph size="2rem">Sorry!</Paragraph>
           )}
-          {progress.currentQuestion + 1 !== questions.length && (
+          {progress.currentQuestion + 1 !== totalQuestions && (
             <NextQuestion onClick={onNextQuestion}>Next Question</NextQuestion>
           )}
         </NextQuestionContainer>
@@ -119,7 +120,7 @@ export default function Question({ questions }) {
       <ScoreBar
         correctAnswers={progress.correctAnswers}
         wrongAnswers={progress.wrongAnswers}
-        totalQuestions={questions.length}
+        totalQuestions={totalQuestions}
       />
     </Container>
   );
