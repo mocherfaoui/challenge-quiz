@@ -2,6 +2,9 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Question from "./components/question";
 
+import questions from "./questions.json";
+import { getQuestions } from "./utils/get-questions";
+
 const theme = {
   colors: {
     gray1: "hsl(0, 0%, 99.0%)",
@@ -20,11 +23,13 @@ const theme = {
 };
 
 function App() {
+  const parsedQuestions = getQuestions(questions);
+
   return (
     <ThemeProvider theme={theme}>
       <Background>
         <Wrapper>
-          <Question />
+          <Question questions={parsedQuestions} />
         </Wrapper>
       </Background>
     </ThemeProvider>

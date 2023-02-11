@@ -16,9 +16,7 @@ import ScoreBar from "./scorebar";
 
 import { getRating } from "../utils/get-rating";
 
-import questions from "../questions.json";
-
-export default function Question() {
+export default function Question({ questions }) {
   const [progress, setProgress] = useState({
     currentQuestion: 0,
     correctAnswers: 0,
@@ -37,7 +35,7 @@ export default function Question() {
   const onAnswerClick = (buttonValue, choice) => {
     if (didAnswer) return;
     setChosenAnswer(choice);
-    if (buttonValue === decodeURIComponent(correctAnswer)) {
+    if (buttonValue === correctAnswer) {
       setProgress({
         ...progress,
         correctAnswers: progress.correctAnswers + 1,
@@ -68,9 +66,7 @@ export default function Question() {
         <h2>
           Question {progress.currentQuestion + 1} of {questions.length}
         </h2>
-        <small>
-          {decodeURIComponent(questions[progress.currentQuestion].category)}
-        </small>
+        <small>{questions[progress.currentQuestion].category}</small>
         <div>
           {[...Array(3)].map((_, index) => (
             <Star key={index}>
@@ -85,7 +81,7 @@ export default function Question() {
         </div>
       </QuestionInfo>
       <QuestionDescription>
-        {decodeURIComponent(questions[progress.currentQuestion].question)}
+        {questions[progress.currentQuestion].question}
       </QuestionDescription>
       <Choices>
         {choices.map((choice, index) => (
@@ -97,7 +93,7 @@ export default function Question() {
             didAnswer={didAnswer}
             onClick={(e) => onAnswerClick(e.target.innerText, choice)}
           >
-            {decodeURIComponent(choice)}
+            {choice}
           </ChoiceButton>
         ))}
       </Choices>
