@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   ChoiceButton,
@@ -15,6 +15,7 @@ import {
 import ScoreBar from "./scorebar";
 
 import { getRating } from "../utils/get-rating";
+import { shuffleArray } from "../utils/shuffle-array";
 
 export default function Question({ questions }) {
   const [progress, setProgress] = useState({
@@ -24,10 +25,16 @@ export default function Question({ questions }) {
   });
   const [chosenAnswer, setChosenAnswer] = useState("");
 
-  const choices = [
-    questions[progress.currentQuestion].correct_answer,
-    ...questions[progress.currentQuestion].incorrect_answers,
-  ];
+  const choices = useMemo(
+    () =>
+      shuffleArray([
+        questions[progress.currentQuestion].correct_answer,
+        ...questions[progress.currentQuestion].incorrect_answers,
+      ]),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [progress.currentQuestion]
+  );
+
   const didAnswer = chosenAnswer !== "";
   const correctAnswer = questions[progress.currentQuestion].correct_answer;
   const isCorrectAnswer = chosenAnswer === correctAnswer;
