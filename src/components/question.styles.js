@@ -37,13 +37,16 @@ export const Choices = styled.div`
   gap: 2rem;
 `;
 
-export const ChoiceButton = styled.button`
+const Button = styled.button`
   font-weight: 500;
   font-size: 1rem;
   border-radius: 4px;
   border-width: 1px;
   border-style: solid;
   cursor: pointer;
+`;
+
+export const ChoiceButton = styled(Button)`
   ${(props) => {
     //this needs to be refactored/changed
     let styles;
@@ -89,9 +92,8 @@ export const NextQuestionContainer = styled.div`
   gap: 1rem;
 `;
 
-export const NextQuestion = styled.button`
+export const NextQuestion = styled(Button)`
   padding: 0.5rem 1rem;
-  cursor: pointer;
 `;
 
 export const Star = styled.div`
