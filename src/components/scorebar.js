@@ -23,7 +23,7 @@ export default function ScoreBar({
 
 const ScoreContainer = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   left: 0;
   width: 100%;
   display: flex;
