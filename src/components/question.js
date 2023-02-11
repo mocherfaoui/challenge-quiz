@@ -15,11 +15,6 @@ import {
 import ScoreBar from "./scorebar";
 
 import { getRating } from "../utils/get-rating";
-import {
-  getCurrentScore,
-  getLowestScore,
-  getMaxScore,
-} from "../utils/score-calculation";
 
 import questions from "../questions.json";
 
@@ -119,14 +114,9 @@ export default function Question() {
         </NextQuestionContainer>
       )}
       <ScoreBar
-        currentQuestion={progress.currentQuestion}
-        getCurrentScore={() =>
-          getCurrentScore(progress.correctAnswers, progress.wrongAnswers)
-        }
-        getLowestScore={() =>
-          getLowestScore(progress.correctAnswers, questions.length)
-        }
-        getMaxScore={() => getMaxScore(progress.wrongAnswers, questions.length)}
+        correctAnswers={progress.correctAnswers}
+        wrongAnswers={progress.wrongAnswers}
+        totalQuestions={questions.length}
       />
     </Container>
   );

@@ -1,21 +1,28 @@
 import React from "react";
 import styled from "styled-components";
+import { getScore } from "../utils/score-calculation";
 
 export default function ScoreBar({
-  getCurrentScore,
-  getLowestScore,
-  getMaxScore,
+  correctAnswers,
+  wrongAnswers,
+  totalQuestions,
 }) {
+  const { currentScore, lowestScore, maxScore } = getScore(
+    correctAnswers,
+    wrongAnswers,
+    totalQuestions
+  );
+
   return (
     <ScoreContainer>
       <ScoreDetails>
-        <span>Score: {getCurrentScore() || 0}%</span>
-        <span>Max Score: {getMaxScore()}%</span>
+        <span>Score: {currentScore || 0}%</span>
+        <span>Max Score: {maxScore}%</span>
       </ScoreDetails>
       <ScoreBarContainer>
-        <Bar width={getLowestScore} color="gray12" zIndex="3" />
-        <Bar width={getCurrentScore} color="gray10" zIndex="2"/>
-        <Bar width={getMaxScore} color="gray8" zIndex="1"/>
+        <Bar width={lowestScore} color="gray12" zIndex="3" />
+        <Bar width={currentScore} color="gray10" zIndex="2" />
+        <Bar width={maxScore} color="gray8" zIndex="1" />
       </ScoreBarContainer>
     </ScoreContainer>
   );
