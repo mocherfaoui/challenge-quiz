@@ -1,4 +1,4 @@
-import { getRating } from "../utils/get-rating";
+import { getRating } from "../utils";
 
 it("should return a number for every case", () => {
   expect(getRating("easy")).toBe(1);

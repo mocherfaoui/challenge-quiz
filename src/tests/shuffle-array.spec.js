@@ -1,4 +1,4 @@
-import { shuffleArray } from "../utils/shuffle-array";
+import { shuffleArray } from "../utils";
 
 const answers = [
   "Homo Ergaster",
