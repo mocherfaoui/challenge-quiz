@@ -20,9 +20,24 @@ export default function ScoreBar({
         <span>Max Score: {maxScore}%</span>
       </ScoreDetails>
       <ScoreBarContainer>
-        <Bar width={lowestScore} color="gray12" zIndex="3" />
-        <Bar width={currentScore} color="gray10" zIndex="2" />
-        <Bar width={maxScore} color="gray8" zIndex="1" />
+        <Bar
+          width={lowestScore}
+          color="gray12"
+          zIndex="3"
+          data-testid="lowest-score-bar"
+        />
+        <Bar
+          width={currentScore}
+          color="gray10"
+          zIndex="2"
+          data-testid="current-score-bar"
+        />
+        <Bar
+          width={maxScore}
+          color="gray8"
+          zIndex="1"
+          data-testid="max-score-bar"
+        />
       </ScoreBarContainer>
     </ScoreContainer>
   );

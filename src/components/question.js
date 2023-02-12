@@ -74,14 +74,14 @@ export default function Question({
           of
           <span data-testid="total-questions"> {totalQuestions}</span>
         </h2>
-        <small>{question.category}</small>
+        <small data-testid="question-category">{question.category}</small>
         <div>
           {[...Array(3)].map((_, index) => (
             <Star key={index}>
               {getRating(question.difficulty) <= index ? (
                 <span>&#9734;</span>
               ) : (
-                <span>&#9733;</span>
+                <span data-testid="question-difficulty">&#9733;</span>
               )}
             </Star>
           ))}
@@ -108,12 +108,18 @@ export default function Question({
       {didAnswer && (
         <NextQuestionContainer>
           {isCorrectAnswer ? (
-            <Paragraph size="2rem">Correct!</Paragraph>
+            <Paragraph size="2rem" data-testid="correct-answer">
+              Correct!
+            </Paragraph>
           ) : (
-            <Paragraph size="2rem">Sorry!</Paragraph>
+            <Paragraph size="2rem" data-testid="wrong-answer">
+              Sorry!
+            </Paragraph>
           )}
           {progress.currentQuestion + 1 !== totalQuestions && (
-            <NextQuestion onClick={onNextQuestion}>Next Question</NextQuestion>
+            <NextQuestion onClick={onNextQuestion} data-testid="next-question">
+              Next Question
+            </NextQuestion>
           )}
         </NextQuestionContainer>
       )}
