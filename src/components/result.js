@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { getScore } from "../utils";
+import confetti from "canvas-confetti";
 
 export default function Result({
   correctAnswers,
   wrongAnswers,
   totalQuestions,
 }) {
-  const { currentScore } = getScore(
-    correctAnswers,
-    wrongAnswers,
-    totalQuestions
-  );
+  const currentScore = Math.round((correctAnswers / totalQuestions) * 100);
+
+  useEffect(() => {
+    var duration = 2 * 1000;
+    var end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 7,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+      });
+
+      confetti({
+        particleCount: 7,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }, []);
+
   return (
     <ResultContainer>
       <h2>Result</h2>
