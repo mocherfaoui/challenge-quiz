@@ -1,14 +1,5 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
-  padding: 2rem;
-  @media (min-width: 768px) {
-    padding: 4rem;
-  }
-  width: 100%;
-  position: relative;
-`;
-
 export const QuestionInfo = styled.div`
   display: flex;
   flex-direction: column;

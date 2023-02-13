@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-style: solid;
+  border-width: 0;
+  border-color: inherit;
+}

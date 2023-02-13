@@ -3,7 +3,6 @@ import React, { useMemo, useState } from "react";
 import {
   ChoiceButton,
   Choices,
-  Container,
   NextQuestion,
   NextQuestionContainer,
   Paragraph,
@@ -14,13 +13,14 @@ import {
 } from "./question.styles";
 import ScoreBar from "./scorebar";
 
-import { getRating, shuffleArray } from "../utils";
+import { getProgressBarValue, getRating, shuffleArray } from "../utils";
 
 export default function Question({
   question,
   progress,
   setProgress,
   totalQuestions,
+  viewResult,
 }) {
   const [chosenAnswer, setChosenAnswer] = useState("");
 
@@ -30,6 +30,7 @@ export default function Question({
     [question]
   );
 
+  const isLastQuestion = progress.currentQuestion === totalQuestions - 1;
   const didAnswer = chosenAnswer !== "";
   const correctAnswer = question.correct_answer;
   const isCorrectAnswer = chosenAnswer === correctAnswer;
@@ -59,9 +60,9 @@ export default function Question({
   };
 
   return (
-    <Container>
+    <>
       <ProgressBar
-        value={(progress.currentQuestion + 1) * (100 / totalQuestions)}
+        value={getProgressBarValue(progress.currentQuestion, totalQuestions)}
         max="100"
         data-testid="progress-bar"
       />
@@ -116,7 +117,9 @@ export default function Question({
               Sorry!
             </Paragraph>
           )}
-          {progress.currentQuestion + 1 !== totalQuestions && (
+          {isLastQuestion ? (
+            <NextQuestion onClick={viewResult}>View Result</NextQuestion>
+          ) : (
             <NextQuestion onClick={onNextQuestion} data-testid="next-question">
               Next Question
             </NextQuestion>
@@ -128,6 +131,6 @@ export default function Question({
         wrongAnswers={progress.wrongAnswers}
         totalQuestions={totalQuestions}
       />
-    </Container>
+    </>
   );
 }
