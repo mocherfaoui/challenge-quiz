@@ -7,7 +7,7 @@ export default function ViewNextQuestion({
   isCorrectAnswer,
   isLastQuestion,
   viewResult,
-  onNextQuestion,
+  handleNextQuestion,
 }) {
   return (
     <NextQuestionContainer>
@@ -23,7 +23,7 @@ export default function ViewNextQuestion({
       {isLastQuestion ? (
         <Button onClick={viewResult}>View Result</Button>
       ) : (
-        <Button onClick={onNextQuestion} data-testid="next-question">
+        <Button onClick={handleNextQuestion} data-testid="next-question">
           Next Question
         </Button>
       )}

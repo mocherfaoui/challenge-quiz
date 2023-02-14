@@ -19,7 +19,7 @@ export default function Question({
   totalQuestions,
   viewResult,
 }) {
-  const choices = useMemo(
+  const shuffledChoices = useMemo(
     () =>
       shuffleArray([question.correct_answer, ...question.incorrect_answers]),
     [question]
@@ -30,7 +30,7 @@ export default function Question({
   const correctAnswer = question.correct_answer;
   const isCorrectAnswer = chosenAnswer === correctAnswer;
 
-  const onAnswerClick = (buttonValue, choice) => {
+  const handleAnswerClick = (buttonValue, choice) => {
     if (didAnswer) return;
 
     if (buttonValue === correctAnswer) {
@@ -48,7 +48,7 @@ export default function Question({
     }
   };
 
-  const onNextQuestion = () => {
+  const handleNextQuestion = () => {
     setProgress({
       ...progress,
       currentQuestion: progress.currentQuestion + 1,
@@ -75,14 +75,14 @@ export default function Question({
         {question.question}
       </QuestionDescription>
       <Choices>
-        {choices.map((choice, index) => (
+        {shuffledChoices.map((choice, index) => (
           <ChoiceButton
             key={index}
             type="button"
             chosenAnswer={didAnswer && choice === chosenAnswer}
             isCorrect={didAnswer && choice === correctAnswer}
             didAnswer={didAnswer}
-            onClick={(e) => onAnswerClick(e.target.innerText, choice)}
+            onClick={(e) => handleAnswerClick(e.target.innerText, choice)}
             data-testid="question-choice"
           >
             {choice}
@@ -94,7 +94,7 @@ export default function Question({
           isCorrectAnswer={isCorrectAnswer}
           isLastQuestion={isLastQuestion}
           viewResult={viewResult}
-          onNextQuestion={onNextQuestion}
+          handleNextQuestion={handleNextQuestion}
         />
       )}
       <ScoreBar
