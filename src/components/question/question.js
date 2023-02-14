@@ -3,14 +3,12 @@ import React, { useMemo } from "react";
 import {
   ChoiceButton,
   Choices,
-  NextQuestionContainer,
-  Paragraph,
   ProgressBar,
   QuestionDescription,
 } from "./styles";
 import ScoreBar from "./scorebar";
 import QuestionInfo from "./info";
-import { Button } from "../shared";
+import ViewNextQuestion from "./view-next-question";
 
 import { getProgressBarValue, shuffleArray } from "../../utils";
 
@@ -92,24 +90,12 @@ export default function Question({
         ))}
       </Choices>
       {didAnswer && (
-        <NextQuestionContainer>
-          {isCorrectAnswer ? (
-            <Paragraph size="2rem" data-testid="correct-answer">
-              Correct!
-            </Paragraph>
-          ) : (
-            <Paragraph size="2rem" data-testid="wrong-answer">
-              Sorry!
-            </Paragraph>
-          )}
-          {isLastQuestion ? (
-            <Button onClick={viewResult}>View Result</Button>
-          ) : (
-            <Button onClick={onNextQuestion} data-testid="next-question">
-              Next Question
-            </Button>
-          )}
-        </NextQuestionContainer>
+        <ViewNextQuestion
+          isCorrectAnswer={isCorrectAnswer}
+          isLastQuestion={isLastQuestion}
+          viewResult={viewResult}
+          onNextQuestion={onNextQuestion}
+        />
       )}
       <ScoreBar
         correctAnswers={progress.correctAnswers}
