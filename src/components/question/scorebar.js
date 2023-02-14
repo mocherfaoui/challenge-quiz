@@ -78,5 +78,4 @@ const Bar = styled.span`
   position: absolute;
   height: 100%;
   z-index: ${(props) => props.zIndex};
-  border-radius: inherit;
 `;
