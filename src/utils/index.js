@@ -49,7 +49,8 @@ export const getScore = (correctAnswers, wrongAnswers, totalQuestions) => {
   const maxScore = Math.round(
     ((totalQuestions - wrongAnswers) / totalQuestions) * 100
   );
-  const currentScore = Math.round((correctAnswers / totalQuestions) * 100);
+  const currentScore =
+    Math.round((correctAnswers / (correctAnswers + wrongAnswers)) * 100) || 0;
   const lowestScore = Math.round((correctAnswers / totalQuestions) * 100);
 
   return { maxScore, currentScore, lowestScore };
