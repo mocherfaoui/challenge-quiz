@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { getScore } from "../utils";
+import { getScore } from "../../utils";
 
 export default function ScoreBar({
   correctAnswers,
@@ -78,4 +78,5 @@ const Bar = styled.span`
   position: absolute;
   height: 100%;
   z-index: ${(props) => props.zIndex};
+  border-radius: inherit;
 `;

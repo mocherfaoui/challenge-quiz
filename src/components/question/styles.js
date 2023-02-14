@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { Button } from "../shared";
 
-export const QuestionInfo = styled.div`
+export const Info = styled.div`
   display: flex;
   flex-direction: column;
   & > h2 {
@@ -28,16 +29,8 @@ export const Choices = styled.div`
   gap: 2rem;
 `;
 
-const Button = styled.button`
-  font-weight: 500;
-  font-size: 1rem;
-  border-radius: 4px;
-  border-width: 1px;
-  border-style: solid;
-  cursor: pointer;
-`;
-
 export const ChoiceButton = styled(Button)`
+  padding: 0.8rem 0.5rem;
   ${(props) => {
     //this needs to be refactored/changed
     let styles;
@@ -81,10 +74,6 @@ export const NextQuestionContainer = styled.div`
   margin-top: 1.5rem;
   align-items: center;
   gap: 1rem;
-`;
-
-export const NextQuestion = styled(Button)`
-  padding: 0.5rem 1rem;
 `;
 
 export const Star = styled.div`
