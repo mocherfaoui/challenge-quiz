@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import confetti from "canvas-confetti";
+import { Button } from "./shared";
 
 export default function Result({
   correctAnswers,
   wrongAnswers,
   totalQuestions,
+  restartQuiz,
 }) {
   const currentScore = Math.round((correctAnswers / totalQuestions) * 100);
 
@@ -56,6 +58,7 @@ export default function Result({
       <Paragraph>
         Final Score: <b>{currentScore}%</b>
       </Paragraph>
+      <Button onClick={restartQuiz}>Restart</Button>
     </ResultContainer>
   );
 }
@@ -63,10 +66,8 @@ export default function Result({
 const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 3rem;
-  & > h2 {
-    text-align: center;
-  }
   & > div {
     margin: 3rem 0;
   }
@@ -92,6 +93,6 @@ const Table = styled.table`
 
 const Paragraph = styled.p`
   font-size: 1.2rem;
-  text-align: center;
   margin-top: 3rem;
+  margin-bottom: 0;
 `;
