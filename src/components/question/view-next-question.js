@@ -12,11 +12,11 @@ export default function ViewNextQuestion({
   return (
     <NextQuestionContainer>
       {isCorrectAnswer ? (
-        <Paragraph size="2rem" data-testid="correct-answer">
+        <Paragraph size="2rem" data-testid="response">
           Correct!
         </Paragraph>
       ) : (
-        <Paragraph size="2rem" data-testid="wrong-answer">
+        <Paragraph size="2rem" data-testid="response">
           Sorry!
         </Paragraph>
       )}
