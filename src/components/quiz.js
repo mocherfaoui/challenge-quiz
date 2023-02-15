@@ -55,4 +55,5 @@ const Container = styled.div`
   }
   width: 100%;
   position: relative;
+  border: 1px solid ${(props) => props.theme.colors.gray6};
 `;

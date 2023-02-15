@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   max-width: 38em;
   margin: 0 auto;
   background: #fff;
-  border: 1px solid ${(props) => props.theme.colors.gray7};
 `;
 
 const Background = styled.div`
