@@ -59,7 +59,7 @@ export default function Question({
   return (
     <>
       <ProgressBar
-        value={getProgressBarValue(progress.currentQuestion, totalQuestions)}
+        value={getProgressBarValue(progress.currentQuestion + 1, totalQuestions)}
         max="100"
         data-testid="progress-bar"
       />

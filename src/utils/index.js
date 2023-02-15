@@ -42,7 +42,7 @@ export const getRating = (difficulty) => {
 };
 
 export const getProgressBarValue = (currentQuestionNumber, totalQuestions) => {
-  return (currentQuestionNumber + 1) * (100 / totalQuestions);
+  return Math.round(currentQuestionNumber * (100 / totalQuestions));
 };
 
 export const getScore = (correctAnswers, wrongAnswers, totalQuestions) => {
